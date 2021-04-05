@@ -14,6 +14,8 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.4.4'
+    implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.3.5'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

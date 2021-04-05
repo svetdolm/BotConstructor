@@ -1,6 +1,8 @@
 package ru.dolmatova.models;
 
-public class Step {
+import java.io.Serializable;
+
+public class Step implements Serializable {
     private int botId;
     private String question;
     private String answer;
