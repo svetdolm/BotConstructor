@@ -21,4 +21,20 @@ public class Step implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bot_id", referencedColumnName = "id", nullable = false, unique = true)
     private Bot bot;
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 }
