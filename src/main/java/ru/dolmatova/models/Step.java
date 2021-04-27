@@ -22,6 +22,12 @@ public class Step implements Serializable {
     @JoinColumn(name = "bot_id", referencedColumnName = "id", nullable = false, unique = true)
     private Bot bot;
 
+    public Step(String question, String answer, Bot bot) {
+        this.question = question;
+        this.answer = answer;
+        this.bot = bot;
+    }
+
     public String getQuestion() {
         return question;
     }
