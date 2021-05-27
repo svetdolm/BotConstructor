@@ -1,7 +1,46 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml">
-<head><title>Home Page</title></head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+    <link href="css/home.css" rel="stylesheet">
+
+</head>
+
 <body>
-<h1>Hello !</h1>
-<p>Welcome to <span th:text="${appName}">Our App</span></p>
+<h1>BotConstructor</h1>
+<p>Welcome to create your <span th:text="${appName}"></span> Telegram Bot!</p>
+<form id="myForm" name="addBot" class="tableBots">
+
+    <div class="input_container">
+        <label for="botName">Name</label>
+        <input name="botName" type="text" id="botName" required class="tableBots_input"/>
+    </div>
+
+    <br>
+    <div class="input_container">
+        <label for="token">Token</label>
+        <input name="token" type="text" id="token" required/>
+    </div>
+
+    <br>
+    <button type="submit" class="tableBots_submitBtn">Create!</button>
+    <br/>
+</form>
+<div>
+    <br>
+    <table border="1" style="width:300px">
+        <thead>
+        <tr>
+            <th>Delete bot</th>
+            <th>My bots</th>
+            <th>Play bot</th>
+        </tr>
+        </thead>
+        <tbody class="tableBots_body">
+        </tbody>
+    </table>
+</div>
+<script src="js/home.js"></script>
 </body>
 </html>

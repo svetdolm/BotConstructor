@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+}
+.tableBots {
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 4px 4px 5px 5px gray;
+    width: 300px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input_container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.tableBots_submitBtn {
+   width: 80px;
+   align-self: flex-end;
+}

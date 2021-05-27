@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bot List</title>
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+    <link href="../../css/bot_view.css" rel="stylesheet">
+</head>
+
+<body>
+<table border="1" style="width:250px">
+    <thead>
+    <tr>
+        <th> Name</th>
+        <th> Token</th>
+    </tr>
+    </thead>
+    <tbody>
+    <input th:field="${bot.id}" hidden/>
+    <td><input th:field="${bot.name}" disabled/></td>
+    <td><input th:field="${bot.token}" disabled/></td>
+    </tbody>
+</table>
+
+<br>
+<br>
+
+<form id="myForm" name="addStep" class="tableSteps">
+    <br>
+
+    <div class="input_container">
+        <label for="question">Question</label>
+        <input name="question" type="text" id="question" required class="tableSteps_input"/>
+    </div>
+
+    <br>
+
+    <div class="input_container">
+        <label for="answer">Answer </label>
+        <input name="answer" type="text" id="answer" required/>
+    </div>
+
+    <br>
+
+    <button type="submit" class="tableSteps_submitBtn">Add</button>
+
+    <br/>
+</form>
+<div>
+
+    <br>
+    <table border="1" style="width:300px">
+        <thead>
+        <tr>
+            <th>Delete step</th>
+            <th>Question</th>
+            <th>Answer</th>
+        </tr>
+        </thead>
+        <tbody class="tableSteps_body">
+        </tbody>
+    </table>
+
+    <br>
+
+    <a th:href="@{/}">Back</a>
+
+</div>
+<script src="../../js/bot_view.js"></script>
+</body>
+</html>
