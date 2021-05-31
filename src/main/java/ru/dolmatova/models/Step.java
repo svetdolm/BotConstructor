@@ -1,5 +1,4 @@
 package ru.dolmatova.models;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,18 +13,25 @@ public class Step implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
     private String question;
     private String answer;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "bot_id", referencedColumnName = "id", nullable = false, unique = true)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "bot_id", referencedColumnName = "id", nullable = false)
     private Bot bot;
+
+    public Step() {
+    }
 
     public Step(String question, String answer, Bot bot) {
         this.question = question;
         this.answer = answer;
         this.bot = bot;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getQuestion() {
@@ -42,5 +48,18 @@ public class Step implements Serializable {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public Bot getBot() {
+        return bot;
+    }
+
+    @Override
+    public String toString() {
+        return "Step{" +
+                "id=" + id +
+                ", question='" + question + '\'' +
+                ", answer='" + answer +
+                '}';
     }
 }

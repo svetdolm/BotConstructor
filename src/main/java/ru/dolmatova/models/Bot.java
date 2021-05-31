@@ -1,5 +1,9 @@
 package ru.dolmatova.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,19 +19,32 @@ import java.util.List;
 public class Bot implements Serializable {
 
     @Id
+    @JsonProperty("id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
+
+    @JsonProperty("name")
     private String name;
+
+    @JsonProperty("token")
     private String token;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "bot", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Step> steps;
 
+    public Bot() {
+    }
 
-    public Bot(String name, String token) {
+    @JsonCreator
+    public Bot(@JsonProperty("name") String name, @JsonProperty("token") String token) {
         this.name = name;
         this.token = token;
         this.steps = new ArrayList<>();
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getName() {
@@ -56,11 +73,11 @@ public class Bot implements Serializable {
 
     @Override
     public String toString() {
-        return "Bot{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", token='" + token + '\'' +
-                ", steps=" + steps +
+        return "{" +
+                "'id':" + id +
+                ", 'name':'" + name + '\'' +
+                ", 'token':'" + token + '\'' +
+                ", 'steps':'" + steps +
                 '}';
     }
 }
