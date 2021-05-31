@@ -15,7 +15,7 @@ public class CommonBot extends TelegramLongPollingBot {
 
     private final Bot bot;
 
-    public CommonBot(int bot) {
+    public CommonBot(Bot bot) {
         this.bot = bot;
     }
 

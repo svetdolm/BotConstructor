@@ -7,9 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import ru.dolmatova.dao.BotRepository;
-import ru.dolmatova.dao.StepRepository;
 import ru.dolmatova.models.Bot;
-import ru.dolmatova.models.Step;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +21,6 @@ public class SimpleController {
     @Autowired
     BotRepository botRepository;
 
-    @Autowired
-    StepRepository stepRepository;
 
     @GetMapping("/")
     public String homePage(Model model) {
