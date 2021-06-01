@@ -26,7 +26,6 @@ window.onload = () => {
             const data = await fetch(`/bots/delete/${botId}`, {
                  method: "DELETE",
             });
-
             return await data.json();
         } catch(e) {
             console.log(e)
@@ -43,6 +42,17 @@ window.onload = () => {
                 console.log(e)
             }
         }
+
+        async function stopBot() {
+                    try {
+                        const data = await fetch(`/bots/stop/`, {
+                             method: "POST",
+                        });
+                        return await data.json();
+                    } catch(e) {
+                        console.log(e)
+                    }
+                }
 
     function createTable(bots){
         bots.forEach(({ id, name }) => {
@@ -69,17 +79,25 @@ window.onload = () => {
 
                //Создать строку активации бота
                const playBotButtonTd = document.createElement("td");
-               const playBotButtonHref = document.createElement("a"); //?
-//               playBotButtonHref.innerText = "play"; //?
-//               playBotButtonHref.href = `bots/start/{id}`; //путь ссылки
+               const playBotButtonHref = document.createElement("a");
                playBotButtonHref.className = "fas fa-play";
                playBotButtonHref.setAttribute("data-id", id);
+
                playBotButtonTd.appendChild(playBotButtonHref);
+
+               //Создать строку остановки бота
+               const stopBotButtonTd = document.createElement("td");
+               const stopBotButtonHref = document.createElement("a");
+               stopBotButtonHref.className = "fas fa-square";
+               //stopBotButtonHref.setAttribute("data-id", id);
+
+               stopBotButtonTd.appendChild(stopBotButtonHref);
 
             // Добавить td в строки
                botRow.appendChild(deleteBotButtonTd); //appendChild позволяет вставить в конец какого-либо другой элемент
                botRow.appendChild(openBotDetailsTd);
                botRow.appendChild(playBotButtonTd);
+               botRow.appendChild(stopBotButtonTd);
                tableBody.appendChild(botRow);
         })
     }
@@ -110,7 +128,10 @@ window.onload = () => {
                 if(target.className === "fas fa-play") {
                     const botId = target.getAttribute("data-id");
                     await startBot(botId);
-                }
+                } else
+                        if(target.className === "fas fa-square") {
+                        await stopBot();
+                        }
     })
 
     createOrUpdateTable();
