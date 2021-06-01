@@ -43,7 +43,7 @@ public class BotController {
             }
             return ResponseEntity.ok(JsonNodeFactory
                     .instance.objectNode()
-                    .put("result", "Бот успешно создан"));
+                    .put("result", "Бот успешно запущен"));
         } else return ResponseEntity.ok(JsonNodeFactory
                 .instance.objectNode()
                 .put("result", "Нет возможности запустить еще одного бота"));
