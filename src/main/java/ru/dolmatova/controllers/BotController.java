@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.generics.BotSession;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import ru.dolmatova.dao.BotRepository;
 import ru.dolmatova.models.Bot;
@@ -26,18 +27,42 @@ public class BotController {
     @Autowired
     BotRepository botRepository;
 
+    private BotSession botSession = null;
+
     @PostMapping("/bots/start/{id}")
-    public void startBot(@PathVariable final int id) {
-        try {
-            Optional<Bot> optionalBot = botRepository.findById((long) id);
-            if (optionalBot.isPresent()) {
-                TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
-                botsApi.registerBot(new CommonBot(optionalBot.get()));
+    public ResponseEntity<JsonNode> startBot(@PathVariable final int id) {
+        if (botSession == null) {
+            try {
+                Optional<Bot> optionalBot = botRepository.findById((long) id);
+                if (optionalBot.isPresent()) {
+                    TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
+                    botSession = botsApi.registerBot(new CommonBot(optionalBot.get()));
+                }
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
             }
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
+            return ResponseEntity.ok(JsonNodeFactory
+                    .instance.objectNode()
+                    .put("result", "Бот успешно создан"));
+        } else return ResponseEntity.ok(JsonNodeFactory
+                .instance.objectNode()
+                .put("result", "Нет возможности запустить еще одного бота"));
     }
+
+    @PostMapping("/bots/stop/")
+    public ResponseEntity<JsonNode> stopBot() {
+        if (botSession != null && botSession.isRunning()) {
+            botSession.stop();
+            botSession = null;
+            return ResponseEntity.ok(JsonNodeFactory
+                    .instance.objectNode()
+                    .put("result", "Бот успешно остановлен"));
+        }
+        return ResponseEntity.ok(JsonNodeFactory
+                .instance.objectNode()
+                .put("result", "Все боты уже остановлены"));
+    }
+
 
     @PostMapping("/bots/save")
     public ResponseEntity<JsonNode> saveBot(@RequestParam(name = "botName") final String botName,
