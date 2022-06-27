@@ -40,6 +40,7 @@ window.onload = () => {
             steps.forEach(({ id, question, answer }) => {
 
                    const stepRow = document.createElement("tr");
+                   stepRow.setAttribute("test-id", `dialogListItem-${question, answer}`);
 
 
                 // Создать строку удаления
@@ -47,6 +48,7 @@ window.onload = () => {
                     const deleteStepButtonImg = document.createElement("i");
                     deleteStepButtonImg.className = "fas fa-trash";
                     deleteStepButtonImg.setAttribute("data-id", id);
+                    deleteStepButtonImg.setAttribute("test-id", 'dialog-delete-button');
 
                     deleteStepButtonTd.appendChild(deleteStepButtonImg);
 
@@ -55,6 +57,7 @@ window.onload = () => {
                    const openQStepDetailsTd = document.createElement("td");
                    const openQStepDetailsHref = document.createElement("a"); //Атрибут href указывает целевую ссылку, либо URL-адрес, либо фрагмент URL-адреса.
                    openQStepDetailsHref.innerText = `${question}`;
+                   openQStepDetailsHref.setAttribute("test-id", 'question-name');
 
                    openQStepDetailsTd.appendChild(openQStepDetailsHref);
 
@@ -63,6 +66,7 @@ window.onload = () => {
                    const openAStepDetailsTd = document.createElement("td");
                    const openAStepDetailsHref = document.createElement("a"); //Атрибут href указывает целевую ссылку, либо URL-адрес, либо фрагмент URL-адреса.
                    openAStepDetailsHref.innerText = `${answer}`;
+                   openAStepDetailsHref.setAttribute("test-id", 'bot-answer');
 
                    openAStepDetailsTd.appendChild(openAStepDetailsHref);
 

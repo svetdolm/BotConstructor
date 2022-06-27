@@ -58,13 +58,14 @@ window.onload = () => {
         bots.forEach(({ id, name }) => {
 
                const botRow = document.createElement("tr");
-
+               botRow.setAttribute("test-id", `botListItem-${name}`);
 
             // Создать строку удаления
                 const deleteBotButtonTd = document.createElement("td");
                 const deleteBotButtonImg = document.createElement("i");
                 deleteBotButtonImg.className = "fas fa-trash";
                 deleteBotButtonImg.setAttribute("data-id", id);
+                deleteBotButtonImg.setAttribute("test-id", 'bot-delete-button');
 
                 deleteBotButtonTd.appendChild(deleteBotButtonImg);
 
@@ -74,6 +75,7 @@ window.onload = () => {
                const openBotDetailsHref = document.createElement("a"); //Атрибут href указывает целевую ссылку, либо URL-адрес, либо фрагмент URL-адреса.
                openBotDetailsHref.innerText = `${name}`;
                openBotDetailsHref.href = `bots/get/${id}`;
+               openBotDetailsHref.setAttribute("test-id", 'bot-name');
 
                openBotDetailsTd.appendChild(openBotDetailsHref);
 
@@ -82,6 +84,7 @@ window.onload = () => {
                const playBotButtonHref = document.createElement("a");
                playBotButtonHref.className = "fas fa-play";
                playBotButtonHref.setAttribute("data-id", id);
+               playBotButtonHref.setAttribute("test-id", 'bot-play-button');
 
                playBotButtonTd.appendChild(playBotButtonHref);
 
@@ -90,6 +93,7 @@ window.onload = () => {
                const stopBotButtonHref = document.createElement("a");
                stopBotButtonHref.className = "fas fa-square";
                //stopBotButtonHref.setAttribute("data-id", id);
+               stopBotButtonHref.setAttribute("test-id", 'bot-stop-button');
 
                stopBotButtonTd.appendChild(stopBotButtonHref);
 
