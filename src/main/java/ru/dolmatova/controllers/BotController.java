@@ -40,6 +40,9 @@ public class BotController {
                 }
             } catch (TelegramApiException e) {
                 e.printStackTrace();
+                return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(JsonNodeFactory
+                        .instance.objectNode()
+                        .put("result", e.getMessage()));
             }
             return ResponseEntity.ok(JsonNodeFactory
                     .instance.objectNode()
@@ -93,7 +96,7 @@ public class BotController {
     }
 
     @DeleteMapping("/bots/delete/{id}")
-    public ResponseEntity<JsonNode> deleteBotById(@PathVariable final int id) throws JsonProcessingException {
+    public ResponseEntity<JsonNode> deleteBotById(@PathVariable final int id) {
         Optional<Bot> bot = botRepository.findById((long) id);
         if (bot.isPresent()) {
             botRepository.deleteById((long) id);
